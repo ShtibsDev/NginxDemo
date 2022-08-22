@@ -36,3 +36,4 @@ jobs:
           server: ${{ secrets.SERVER }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
+          server-dir: /var/www/NginxDemo
