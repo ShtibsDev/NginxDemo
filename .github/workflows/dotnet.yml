@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: ['master']
+    branches: ["master"]
   pull_request:
-    branches: ['master']
+    branches: ["master"]
 
 jobs:
   Build:
@@ -24,7 +24,13 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ./myapp/
+
+      - name: Get Current Dir
+        run: run pwd
+
+      - name: Current Dir Content
+        run: run ls
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -41,6 +47,12 @@ jobs:
       url: http://77.125.153.30/swagger/index.html
 
     steps:
+      - name: Get Current Dir
+        run: run pwd
+
+      - name: Current Dir Content
+        run: run ls
+
       - name: Print artifacts location
         run: echo ${{env.DOTNET_ROOT}}/myapp/
 
