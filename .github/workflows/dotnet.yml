@@ -46,7 +46,7 @@ jobs:
        with:
             username: ubuntu
             server: 77.125.153.30
-            local-dir: ${{env.DOTNET_ROOT}}/myapp
+            local-dir: ${{env.DOTNET_ROOT}}/myapp/
             remote_path: /var/www/NginxDemo/ 
             password: Ofir5185
             
