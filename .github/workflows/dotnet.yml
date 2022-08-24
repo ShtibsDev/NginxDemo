@@ -36,7 +36,7 @@ jobs:
           FTP_SERVER: ${{ secrets.SERVER }}
           FTP_USERNAME: ${{ secrets.USER }}
           FTP_PASSWORD: ${{ secrets.PASS }}
-          LOCAL_DIR: /var/www/NginxDemo
+          LOCAL_DIR: NginxDemo
           METHOD: sftp
           PORT: 22
           ARGS: --delete
