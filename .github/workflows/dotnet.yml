@@ -51,16 +51,19 @@ jobs:
         run: pwd
 
       - name: Current Dir Content
-        run: ls
+        run: ls .
 
-      - name: Print artifacts location
-        run: echo ${{env.DOTNET_ROOT}}/myapp/
+      - name: Check known Dir
+        run: ls /home/runner/work/NginxDemo/
 
-      - name: Log artifacts content
-        run: ls ${{env.DOTNET_ROOT}}/myapp/
+      - name: Install tree
+        run: apt update && apt install tree -y
 
-      - name: Go to artifacts location
-        run: cd ${{env.DOTNET_ROOT}}/myapp/
+      - name: Tree
+        run: tree
+
+      - name: Tree known Dir
+        run: tree /home/runner/work/NginxDemo/
 
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
