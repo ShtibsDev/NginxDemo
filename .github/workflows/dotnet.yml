@@ -31,9 +31,12 @@ jobs:
 
     steps:
       - name: deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.3.1
-        with:
-          server: ${{ secrets.SERVER }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASS }}
-          server-dir: /var/www/NginxDemo/
+        uses: SamKirkland/FTP-Deploy-Action@2.0.0
+        env:
+          FTP_SERVER: ${{ secrets.SERVER }}
+          FTP_USERNAME: ${{ secrets.USER }}
+          FTP_PASSWORD: ${{ secrets.PASS }}
+          LOCAL_DIR: build
+          METHOD: sftp
+          PORT: 22
+          ARGS: --delete
