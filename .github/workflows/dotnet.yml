@@ -30,7 +30,7 @@ jobs:
         run: pwd
 
       - name: Current Dir Content
-        run: run ls
+        run: ls
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -51,7 +51,7 @@ jobs:
         run: pwd
 
       - name: Current Dir Content
-        run: run ls
+        run: ls
 
       - name: Print artifacts location
         run: echo ${{env.DOTNET_ROOT}}/myapp/
