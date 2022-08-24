@@ -30,12 +30,10 @@ jobs:
     environment: Rpi
 
     steps:
-      - name: deploy
-        uses: SamKirkland/FTP-Deploy-Action@2.0.0
-        env:
-          FTP_SERVER: ${{ secrets.SERVER }}
-          FTP_USERNAME: ${{ secrets.USER }}
-          FTP_PASSWORD: ${{ secrets.PASS }}
-          METHOD: sftp
-          PORT: 22
-          ARGS: --delete
+     - name: SFTP Deploy
+       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+       with:
+            username: ubuntu
+            server: 77.125.153.30
+            remote_path: /var/www/NginxDemo/ 
+            password: Ofir5185
