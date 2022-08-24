@@ -11,42 +11,50 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 6.0.x
-      
+
       - name: Restore dependencies
         run: dotnet restore
-      
+
       - name: Build
         run: dotnet build --no-restore
-      
+
       - name: Publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-        
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-        
+
   Deploy:
     needs: Build
     runs-on: ubuntu-latest
 
-    environment: 
+    environment:
       name: Rpi
       url: http://77.125.153.30/swagger/index.html
 
     steps:
-     - name: SFTP Deploy
-       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-       with:
-            username: ubuntu
-            server: 77.125.153.30
-            local_path: ${{env.DOTNET_ROOT}}/myapp/
-            remote_path: /var/www/NginxDemo/ 
-            password: Ofir5185
-            
+      - name: Print artifacts location
+        run: echo ${{env.DOTNET_ROOT}}/myapp/
+
+      - name: Log artifacts content
+        run: ls ${{env.DOTNET_ROOT}}/myapp/
+
+      - name: Go to artifacts location
+        run: cd ${{env.DOTNET_ROOT}}/myapp/
+
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ubuntu
+          server: 77.125.153.30
+          #local_path: ${{env.DOTNET_ROOT}}/myapp/
+          remote_path: /var/www/NginxDemo/
+          password: Ofir5185
