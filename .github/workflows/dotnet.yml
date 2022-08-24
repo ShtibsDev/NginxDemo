@@ -27,7 +27,7 @@ jobs:
         run: dotnet publish -c Release -o ./myapp/
 
       - name: Get Current Dir
-        run: run pwd
+        run: pwd
 
       - name: Current Dir Content
         run: run ls
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Get Current Dir
-        run: run pwd
+        run: pwd
 
       - name: Current Dir Content
         run: run ls
