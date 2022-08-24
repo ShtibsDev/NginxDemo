@@ -20,8 +20,22 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
+      - name: Currrent Dir
+        run: pwd
+      - name: Dir content
+        run: ls
+
+  log:
+    runs-on: ubuntu-latest
+    
+    steps:
+     - name: Currrent Dir
+       run: pwd
+     - name: Dir content
+       run: ls
+        
+    
+    
 
   deploy:
     needs: build
