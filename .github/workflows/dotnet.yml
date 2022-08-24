@@ -7,41 +7,38 @@ on:
     branches: ['master']
 
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
+      
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 6.0.x
+      
       - name: Restore dependencies
         run: dotnet restore
+      
       - name: Build
         run: dotnet build --no-restore
-      - name: Currrent Dir
-        run: pwd
-      - name: Dir content
-        run: ls
-
-  log:
-    runs-on: ubuntu-latest
-    
-    steps:
-     - name: Currrent Dir
-       run: pwd
-     - name: Dir content
-       run: ls
+      
+      - name: Publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
         
-    
-    
-
-  deploy:
-    needs: build
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+        
+  Deploy:
+    needs: Build
     runs-on: ubuntu-latest
 
-    environment: Rpi
+    environment: 
+      name: Rpi
+      url: http://77.125.153.30/swagger/index.html
 
     steps:
      - name: SFTP Deploy
@@ -49,5 +46,7 @@ jobs:
        with:
             username: ubuntu
             server: 77.125.153.30
+            local-dir: ${{env.DOTNET_ROOT}}/myapp
             remote_path: /var/www/NginxDemo/ 
             password: Ofir5185
+            
