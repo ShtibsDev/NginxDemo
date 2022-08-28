@@ -21,24 +21,27 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    Console.WriteLine($"At Endpoint: {DateTime.Now: HH:mm:ss}");
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-       new WeatherForecast
-       (
-           DateTime.Now.AddDays(index),
-           Random.Shared.Next(-20, 55),
-           summaries[Random.Shared.Next(summaries.Length)]
-       ))
-        .ToArray();
-    return forecast;
+  Console.WriteLine($"At Endpoint: {DateTime.Now: HH:mm:ss}");
+  var forecast = Enumerable.Range(1, 5).Select(index =>
+     new WeatherForecast
+     (
+         DateTime.Now.AddDays(index),
+         Random.Shared.Next(-20, 55),
+         summaries[Random.Shared.Next(summaries.Length)]
+     ))
+      .ToArray();
+  return forecast;
 })
 .WithName("GetWeatherForecast");
 
-
+app.MapGet("people/{id}", (int id) =>
+{
+  return new { Id = id, Name = "Ofir" };
+});
 
 app.Run();
 
 record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+  public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
