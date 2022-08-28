@@ -49,10 +49,10 @@ jobs:
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: ubuntu
-          server: 77.125.153.30
+          username: ${{ secrets.USER }}
+          server: ${{ secrets.SERVER }}
           remote_path: /var/www/NginxDemo/
-          password: Ofir5185
+          password: ${{ secrets.PASSWORD }}
     
   Reset:
     needs: Deploy
@@ -62,7 +62,7 @@ jobs:
       - name: Reset .NET service
         uses: appleboy/ssh-action@master
         with:
-          host: 77.125.153.30
-          username: ubuntu
-          password: Ofir5185
+          host: ${{ secrets.SERVER }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
           script: sudo systemctl restart NginxDemo
