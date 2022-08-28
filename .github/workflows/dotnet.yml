@@ -24,13 +24,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Publish
-        run: dotnet publish -c Release -o ./myapp/
-
-      - name: Get Current Dir
-        run: pwd
-
-      - name: Current Dir Content
-        run: ls
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
