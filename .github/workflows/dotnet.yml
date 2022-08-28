@@ -41,24 +41,6 @@ jobs:
       url: http://77.125.153.30/swagger/index.html
 
     steps:
-      # - name: Get Current Dir
-      #   run: pwd
-
-      # - name: Current Dir Content
-      #   run: ls .
-
-      # - name: Check known Dir
-      #   run: ls /home/runner/work/NginxDemo/
-
-      # - name: Install tree
-      #   run: apt update && apt install tree -y
-
-      # - name: Tree
-      #   run: tree
-
-      # - name: Tree known Dir
-      #   run: tree /home/runner/work/NginxDemo/
-
       - name: Get Artifacts
         uses: actions/download-artifact@v3
         with:
@@ -69,6 +51,17 @@ jobs:
         with:
           username: ubuntu
           server: 77.125.153.30
-          #local_path: ${{env.DOTNET_ROOT}}/myapp/
           remote_path: /var/www/NginxDemo/
           password: Ofir5185
+    
+  Reset:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Reset .NET service
+        uses: appleboy/ssh-action@master
+        with:
+          host: 77.125.153.30
+          username: ubuntu
+          password: Ofir5185
+          script: sudo systemctl restart NginxDemo
