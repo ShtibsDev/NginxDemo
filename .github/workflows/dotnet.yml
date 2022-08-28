@@ -55,6 +55,7 @@ jobs:
           password: Ofir5185
     
   Reset:
+    needs: Deploy
     runs-on: ubuntu-latest
     
     steps:
