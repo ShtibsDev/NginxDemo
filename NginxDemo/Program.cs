@@ -36,7 +36,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("people/{id}", (int id) =>
 {
-  return new { Id = id, Name = "Ofir" };
+  return new { Id = id, FirstName = "Ofir", LastName = "Stiber Voronzov" };
 });
 
 app.Run();
