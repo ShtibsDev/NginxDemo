@@ -14,7 +14,7 @@ jobs:
       - name: Pull Code
         uses: elgohr/Publish-Docker-Github-Action@master
         with: 
-          name: ispeakcode/docker-githubaction
+          name: shtibs/nginx-demo:0.0.2
           username: shtibs
           password: DOfir5185
         
