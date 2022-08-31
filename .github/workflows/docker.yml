@@ -28,7 +28,7 @@ jobs:
         with:
           context: "{{defaultContext}}:NginxDemo"
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nginx-demo:0.0.2
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nginx-demo:v1.0.0
           
       
         
