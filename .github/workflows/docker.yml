@@ -1,0 +1,21 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Pull Code
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with: 
+          name: ispeakcode/docker-githubaction
+          username: shtibs
+          password: DOfir5185
+        
+        
