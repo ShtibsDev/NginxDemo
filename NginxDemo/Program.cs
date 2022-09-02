@@ -15,35 +15,19 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+var people = new List<Person>{
+    new Person { Id = 1, FirstName = "Ofir", LastName = "Stiber Voronzov" },
+    new Person { Id = 2, FirstName = "Ellie", LastName = "Stiber Voronzov" },
+    new Person { Id = 3, FirstName = "Steven", LastName = "Stiber Voronzov" },
+    new Person { Id = 4, FirstName = "Connie", LastName = "Stiber Voronzov" },
+    new Person { Id = 5, FirstName = "Michel", LastName = "Stiber Voronzov" }
 };
 
-app.MapGet("/weatherforecast", () =>
-{
-    Console.WriteLine($"At Endpoint: {DateTime.Now: HH:mm:ss}");
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-       new WeatherForecast
-       (
-           DateTime.Now.AddDays(index),
-           Random.Shared.Next(-20, 55),
-           summaries[Random.Shared.Next(summaries.Length)]
-       ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapGet("people", () => people);
 
 app.MapGet("people/{id}", (int id) =>
 {
-    return new Person { Id = id, FirstName = "Ofir", LastName = "Stiber Voronzov" };
+  return people.FirstOrDefault(p => p.Id == id);
 });
 
 app.Run();
-
-record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

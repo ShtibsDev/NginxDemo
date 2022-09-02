@@ -7,7 +7,7 @@ on:
     branches: ["master"]
 
 jobs:
-  Build:
+  Build-Push:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out code
@@ -27,3 +27,19 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nginx-demo:latest
+
+  Pull-Run:
+    needs: Build-Push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull image and run container
+        uses: appleboy/ssh-action@master
+        with:
+          host: 77.125.153.30
+          username: ubuntu
+          password: Ofir5185
+          script: |
+            sudo docker pull shtibs/nginx-demo:latest
+            sudo docker rm nginx-docker -f
+            sudo docker run -d -p 8080:80 --name nginx-docker shtibs/nginx-demo:latest

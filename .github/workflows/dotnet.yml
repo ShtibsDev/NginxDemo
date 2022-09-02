@@ -53,11 +53,11 @@ jobs:
           server: ${{ secrets.SERVER }}
           remote_path: /var/www/NginxDemo/
           password: ${{ secrets.PASSWORD }}
-    
+
   Reset:
     needs: Deploy
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Reset .NET service
         uses: appleboy/ssh-action@master
